@@ -1,0 +1,62 @@
+from project import project
+import projectlist
+
+projects_directory = './TestProjecten/'
+
+p = project('testproject', 3)
+p._priority = 100000
+p.add_task('Plan opstellen','eerste voorstel schrijven')
+p.add_workpackage('Plan opstellen')
+p.add_workpackage('Plan uitvoeren')
+p.add_workpackage('Plan nabespreken')
+p.insert_workpackage('team samenstellen', 2)
+p.add_workpackage('Financiering regelen')
+p.repos_workpackage('Financiering regelen',1)
+
+p.add_task('Plan opstellen','eerste voorstel schrijven')
+p.add_task('Plan opstellen','eerste voorstel schrijven')
+p.add_task('Plan opstellen','commentaar verwerken')
+p.add_task('Financiering regelen','Bedelen op straathoek')
+p.remove_task('Plan opstellen','eerste voorstel schrijven')
+p.remove_task('Plan opstellen','sedfsvs')
+p.add_task('team samenstellen', 'aertf')
+p.remove_workpackage('team samenstellen')
+p.save(projects_directory)
+p.print()
+
+
+p2 = project('oud project',2)
+p2.add_workpackage('plan opstellen')
+p2.add_workpackage('groep verzamelen')
+
+p2.add_task('groep verzamelen','namenlijst maken',1,'doing')
+p2.add_task('groep verzamelen','eerste vergadering plannen', 2)
+p2.add_task('plan opstellen','brainstorm houden',3)
+p2.add_task('plan opstellen','brainstorm resultaten verwerken',4)
+p2.remove_task('plan opstellen','brainstorm houden')
+p2.set_task_status('groep verzamelen', 'namenlijst maken','done')
+p2.save(projects_directory)
+p2.print()
+
+
+p3 = project('Groot project',1)
+p3.add_workpackage('groep verzamelen')
+p3.add_workpackage('plan opstellen')
+p3.add_workpackage('Uitvoer')
+p3.add_workpackage('Afronden')
+
+p3.add_task('groep verzamelen','namenlijst maken',1,'doing')
+p3.add_task('groep verzamelen','eerste vergadering plannen', 2,'done')
+p3.add_task('plan opstellen','brainstorm houden',3,'done')
+p3.add_task('plan opstellen','brainstorm resultaten verwerken',4,'doing')
+p3.add_task('plan opstellen','grafieken maken',4,'doing')
+p3.add_task('plan opstellen','2de brainstorm houden',2,'to do')
+p3.add_task('plan opstellen','2de brainstorm resultaten vewerken',2,'to do')
+p3.add_task('plan opstellen','plan presenteren',4,'todo')
+p3.add_task('Uitvoer','Dingen die ik nog niet weet',100)
+p3.add_task('Afronden','Dingen die ik nog niet weet',20)
+
+p3.save(projects_directory)
+p3.print()
+
+print(projectlist.getprojectlist(projects_directory))
