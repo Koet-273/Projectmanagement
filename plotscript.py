@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 projects_directory = './TestProjecten/'
 p=project()
-p.load('oud project', projects_directory)
+p.load('Groot project', projects_directory)
 
 plotproject.progress(p)
 plotproject.table_tasklist(p)
