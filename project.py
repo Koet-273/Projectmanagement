@@ -1,6 +1,13 @@
 import pandas as pd
 import os
 import numpy as np
+from collections import namedtuple
+
+task_status_tuple = namedtuple('task_status_tuple','todo', 'doing', 'done')
+task_status = task_status_tuple('todo','doing','done')
+project_status_tuple = namedtuple('project_status_tuple','active', 'closed')
+project_status = project_status_tuple('active','closed')
+
 
 class project:
     _tasklist = pd.DataFrame(columns=['workpackage', 'task', 'status', 'size'])
@@ -66,7 +73,7 @@ class project:
         self._wp = self._wp.drop(self._wp[self._wp.workpackage == workpackage].index)
         self._tasklist = self._tasklist.drop(self._tasklist[self._tasklist.workpackage == workpackage].index)
 
-    def add_task(self, workpackage, task, size = 1, status='to do'):
+    def add_task(self, workpackage, task, size = 1, status=task_status.todo):
         if self.task_exists(task, workpackage):
             print('Task \'{}\' already exists in workpackage \'{}\'.'.format(task, workpackage))
         elif self.wp_exists(workpackage):
@@ -117,4 +124,5 @@ class project:
         print('--------------------')
         print('status = {}'.format(self._status))
         print('--------------------')
+
 

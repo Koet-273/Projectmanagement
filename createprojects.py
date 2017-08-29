@@ -1,4 +1,4 @@
-from project import project
+from project import project, task_status
 from project_list import project_list
 
 projects_directory = './TestProjecten/'
@@ -31,12 +31,12 @@ p2 = project('oud project',2)
 p2.add_workpackage('plan opstellen')
 p2.add_workpackage('groep verzamelen')
 
-p2.add_task('groep verzamelen','namenlijst maken',1,'doing')
+p2.add_task('groep verzamelen','namenlijst maken',1,task_status.doing)
 p2.add_task('groep verzamelen','eerste vergadering plannen', 2)
 p2.add_task('plan opstellen','brainstorm houden',3)
 p2.add_task('plan opstellen','brainstorm resultaten verwerken',4)
 p2.remove_task('plan opstellen','brainstorm houden')
-p2.set_task_status('groep verzamelen', 'namenlijst maken','done')
+p2.set_task_status('groep verzamelen', 'namenlijst maken',task_status.done)
 myprojlist.save_project(p2)
 p2.print()
 
@@ -47,14 +47,14 @@ p3.add_workpackage('plan opstellen')
 p3.add_workpackage('Uitvoer')
 p3.add_workpackage('Afronden')
 
-p3.add_task('groep verzamelen','namenlijst maken',1,'doing')
-p3.add_task('groep verzamelen','eerste vergadering plannen', 2,'done')
-p3.add_task('plan opstellen','brainstorm houden',3,'done')
-p3.add_task('plan opstellen','brainstorm resultaten verwerken',4,'doing')
-p3.add_task('plan opstellen','grafieken maken',4,'doing')
-p3.add_task('plan opstellen','2de brainstorm houden',2,'to do')
-p3.add_task('plan opstellen','2de brainstorm resultaten vewerken',2,'to do')
-p3.add_task('plan opstellen','plan presenteren',4,'todo')
+p3.add_task('groep verzamelen','namenlijst maken',1,task_status.doing)
+p3.add_task('groep verzamelen','eerste vergadering plannen', 2, task_status.done)
+p3.add_task('plan opstellen','brainstorm houden',3,task_status.done)
+p3.add_task('plan opstellen','brainstorm resultaten verwerken',4,task_status.doing)
+p3.add_task('plan opstellen','grafieken maken',4,task_status.doing)
+p3.add_task('plan opstellen','2de brainstorm houden',2,task_status.todo)
+p3.add_task('plan opstellen','2de brainstorm resultaten vewerken',2,task_status.todo)
+p3.add_task('plan opstellen','plan presenteren',4,task_status.todo)
 p3.add_task('Uitvoer','Dingen die ik nog niet weet',100)
 p3.add_task('Afronden','Dingen die ik nog niet weet',20)
 
