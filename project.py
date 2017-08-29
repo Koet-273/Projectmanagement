@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-import projectlist
 import numpy as np
 
 class project:
@@ -14,21 +13,18 @@ class project:
         self._name = name
         self._priority = priority
 
-    def load(self, name, directory):
-        if projectlist.project_exists(directory,name):
-            self._status, self._priority = projectlist.read_project_properties(directory, name)
-            self._name = name
-            self._tasklist = pd.read_csv(os.path.join(directory, name, 'tasklist.csv'), index_col=0)
-            self._wp = pd.read_csv(os.path.join(directory, name, 'workpackages.csv'), index_col=0)
-        else:
-            print('project does not exist.')
+    def load(self, name, directory, status, priority):
+        self._status = status
+        self._priority =priority
+        self._name = name
+        self._tasklist = pd.read_csv(os.path.join(directory, name, 'tasklist.csv'), index_col=0)
+        self._wp = pd.read_csv(os.path.join(directory, name, 'workpackages.csv'), index_col=0)
 
     def save(self,directory):
         project_dir, success = self.prepare_directory(directory)
         if success:
             self._tasklist.to_csv(os.path.join(project_dir, 'tasklist.csv'))
             self._wp.to_csv(os.path.join(project_dir,'workpackages.csv'))
-            projectlist.write_to_projectlist(directory, self._name, self._status, self._priority)
 
     def prepare_directory(self, directory):
         success = False

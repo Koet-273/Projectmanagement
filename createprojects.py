@@ -1,7 +1,9 @@
 from project import project
-import projectlist
+from project_list import project_list
 
 projects_directory = './TestProjecten/'
+
+myprojlist = project_list(projects_directory)
 
 p = project('testproject', 3)
 p._priority = 100000
@@ -21,7 +23,7 @@ p.remove_task('Plan opstellen','eerste voorstel schrijven')
 p.remove_task('Plan opstellen','sedfsvs')
 p.add_task('team samenstellen', 'aertf')
 p.remove_workpackage('team samenstellen')
-p.save(projects_directory)
+myprojlist.save_project(p)
 p.print()
 
 
@@ -35,7 +37,7 @@ p2.add_task('plan opstellen','brainstorm houden',3)
 p2.add_task('plan opstellen','brainstorm resultaten verwerken',4)
 p2.remove_task('plan opstellen','brainstorm houden')
 p2.set_task_status('groep verzamelen', 'namenlijst maken','done')
-p2.save(projects_directory)
+myprojlist.save_project(p2)
 p2.print()
 
 
@@ -56,7 +58,6 @@ p3.add_task('plan opstellen','plan presenteren',4,'todo')
 p3.add_task('Uitvoer','Dingen die ik nog niet weet',100)
 p3.add_task('Afronden','Dingen die ik nog niet weet',20)
 
-p3.save(projects_directory)
+myprojlist.save_project(p3)
 p3.print()
-
-print(projectlist.getprojectlist(projects_directory))
+myprojlist.print()
