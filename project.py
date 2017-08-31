@@ -3,11 +3,8 @@ import os
 import numpy as np
 from collections import namedtuple
 
-task_status_tuple = namedtuple('task_status_tuple','todo', 'doing', 'done')
-task_status = task_status_tuple('todo','doing','done')
-project_status_tuple = namedtuple('project_status_tuple','active', 'closed')
-project_status = project_status_tuple('active','closed')
-
+task_status_tuple = namedtuple('task_status_tuple', ['todo', 'doing', 'done'])
+task_status = task_status_tuple('todo', 'doing', 'done')
 
 class project:
     _tasklist = pd.DataFrame(columns=['workpackage', 'task', 'status', 'size'])
@@ -15,15 +12,21 @@ class project:
     _name = 'empty'
     _status = 1
     _priority = 1
+    _AOI = 'General'
 
     def __init__(self, name='empty', priority=1):
         self._name = name
         self._priority = priority
 
-    def _load(self, name, directory, status, priority):
+    def _load_from_series(self, directory, projectseries):
+        self._load(directory, projectseries.AOI, projectseries.name, projectseries.status, projectseries.priority)
+
+    def _load(self, directory, AOI, name, status, priority):
         self._status = status
         self._priority =priority
         self._name = name
+        self._AOI = AOI
+
         self._tasklist = pd.read_csv(os.path.join(directory, name, 'tasklist.csv'), index_col=0)
         self._wp = pd.read_csv(os.path.join(directory, name, 'workpackages.csv'), index_col=0)
 
@@ -35,6 +38,7 @@ class project:
 
     def prepare_directory(self, directory):
         success = False
+        project_dir = ''
         if not os.path.isdir(directory):
             print('Directory \'{}\' does not exist'.format(directory))
             print('Save failed')

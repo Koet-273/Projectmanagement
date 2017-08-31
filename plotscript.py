@@ -1,10 +1,10 @@
 import plotproject
-from project_list  import project_list
+from projectlist  import ProjectList
 import matplotlib.pyplot as plt
 
 projects_directory = './TestProjecten/'
 
-myprojlist = project_list(projects_directory)
+myprojlist = ProjectList(projects_directory)
 p = myprojlist.get_project_byname('Groot project')
 
 plotproject.progress(p)

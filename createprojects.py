@@ -1,9 +1,9 @@
 from project import project, task_status
-from project_list import project_list
+from projectlist import ProjectList
 
 projects_directory = './TestProjecten/'
 
-myprojlist = project_list(projects_directory)
+myprojlist = ProjectList(projects_directory)
 
 p = project('testproject', 3)
 p._priority = 100000
